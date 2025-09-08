@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import { mockFlows, mockExecutions, mockApplications, mockUsers } from '../data/mockData';
-import { Flow, FlowExecution, Application, User, Theme } from '../types';
+import { Flow, FlowExecution, Application, User } from '../types';
 
 interface AppState {
   flows: Flow[];
@@ -10,7 +10,6 @@ interface AppState {
   applications: Application[];
   users: User[];
   currentUser: User;
-  theme: Theme;
 }
 
 type AppAction = 
@@ -21,16 +20,14 @@ type AppAction =
   | { type: 'ADD_EXECUTION'; payload: FlowExecution }
   | { type: 'ADD_APPLICATION'; payload: Application }
   | { type: 'UPDATE_APPLICATION'; payload: Application }
-  | { type: 'DELETE_APPLICATION'; payload: string }
-  | { type: 'TOGGLE_THEME' };
+  | { type: 'DELETE_APPLICATION'; payload: string };
 
 const initialState: AppState = {
   flows: mockFlows,
   executions: mockExecutions,
   applications: mockApplications,
   users: mockUsers,
-  currentUser: mockUsers[0],
-  theme: 'dark'
+  currentUser: mockUsers[0]
 };
 
 const AppContext = createContext<{
@@ -85,11 +82,6 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return {
         ...state,
         applications: state.applications.filter(app => app.id !== action.payload)
-      };
-    case 'TOGGLE_THEME':
-      return {
-        ...state,
-        theme: state.theme === 'dark' ? 'light' : 'dark'
       };
     default:
       return state;

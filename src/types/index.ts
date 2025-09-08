@@ -77,5 +77,3 @@ export interface NotificationPreferences {
   slack: boolean;
   inApp: boolean;
 }
-
-export type Theme = 'dark' | 'light';
