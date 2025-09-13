@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Save, ArrowLeft, Plus, Play } from 'lucide-react';
+import { Save, ArrowLeft, Play, Plus } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Flow, FlowStep } from '../../types';
 import FlowStepCard from './FlowStepCard';
@@ -43,9 +43,9 @@ export default function FlowBuilder() {
     };
 
     if (id && state.flows.find(f => f.id === id)) {
-      dispatch({ type: 'UPDATE_FLOW', payload: updatedFlow });
+      dispatch({ type: 'UPDATE_FLOW', payload: updatedFlow as any });
     } else {
-      dispatch({ type: 'ADD_FLOW', payload: updatedFlow });
+       dispatch({ type: 'ADD_FLOW', payload: updatedFlow as any });
     }
 
     router.push('/flows');

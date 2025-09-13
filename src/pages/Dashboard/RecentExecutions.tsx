@@ -6,7 +6,7 @@ import { formatDistanceToNow } from '../../utils/dateUtils';
 
 export default function RecentExecutions() {
   const { state } = useApp();
-  const { theme } = state;
+  const theme = (state as any)?.theme ?? 'light';
   const router = useRouter();
   
   const recentExecutions = [...state.executions]

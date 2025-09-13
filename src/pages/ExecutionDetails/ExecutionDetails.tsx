@@ -1,6 +1,7 @@
+'use client';
 import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, Play, Clock, CheckCircle, XCircle, Loader, RotateCcw, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Play, Clock, CheckCircle, XCircle, Loader, RotateCcw } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { formatDistanceToNow } from '../../utils/dateUtils';
 import PipelineTimeline from './PipelineTimeline';
@@ -72,7 +73,7 @@ export default function ExecutionDetails() {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <button
-            onClick={() => navigate('/executions')}
+            onClick={() => router.push('/executions')}
             className="p-2 text-gray-400 hover:text-white transition-colors"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -164,7 +165,7 @@ export default function ExecutionDetails() {
             <h3 className="text-lg font-semibold text-white mb-4">Runtime Variables</h3>
             
             <div className="space-y-2">
-              {Object.entries(execution.runtimeVariables).map(([key, value]) => (
+              {Object.entries(execution.runtimeVariables || {}).map(([key, value]) => (
                 <div key={key} className="flex items-center justify-between p-2 bg-gray-700/50 rounded text-sm">
                   <span className="text-gray-300 font-medium">{key}</span>
                   <span className="text-cyan-400">{String(value)}</span>

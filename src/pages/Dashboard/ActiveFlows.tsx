@@ -6,7 +6,7 @@ import { formatDistanceToNow } from '../../utils/dateUtils';
 
 export default function ActiveFlows() {
   const { state } = useApp();
-  const { theme } = state;
+  const theme = (state as any)?.theme ?? 'light';
   const router = useRouter();
   
   const activeFlows = state.flows.filter(flow => flow.status === 'active');

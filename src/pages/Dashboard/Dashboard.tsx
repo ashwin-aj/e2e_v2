@@ -7,7 +7,7 @@ import ExecutionChart from './ExecutionChart';
 
 export default function Dashboard() {
   const { state } = useApp();
-  const { theme } = state;
+  const theme = (state as any)?.theme ?? 'light';
 
   return (
     <div className="space-y-6">

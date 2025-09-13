@@ -7,6 +7,16 @@ interface PipelineTimelineProps {
 }
 
 export default function PipelineTimeline({ execution }: PipelineTimelineProps) {
+
+  if (!execution?.flow?.steps) {
+    return (
+      <div className="bg-gray-800 border border-gray-700 rounded-xl p-6">
+        <h2 className="text-xl font-semibold text-white mb-6">Pipeline Timeline</h2>
+        <p className="text-gray-400">No execution data available.</p>
+      </div>
+    );
+  }
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'passed':
@@ -44,7 +54,7 @@ export default function PipelineTimeline({ execution }: PipelineTimelineProps) {
       
       <div className="space-y-4">
         {execution.flow.steps.map((step, stepIndex) => {
-          const pipelineExecution = execution.pipelineExecutions.find(p => p.stepId === step.id);
+          const pipelineExecution = execution.pipelineExecutions?.find(p => p.stepId === step.id);
           
           return (
             <div key={step.id} className="relative">
@@ -52,11 +62,11 @@ export default function PipelineTimeline({ execution }: PipelineTimelineProps) {
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
-                      {step.order}
+                      {step?.order ?? "—"}
                     </div>
                     <div>
-                      <h4 className="font-medium text-white mb-1">{step.application.name}</h4>
-                      <p className="text-sm text-gray-400">{step.testStage} • {step.testTag}</p>
+                      <h4 className="font-medium text-white mb-1">{step?.application?.name ?? "Unknown App"}</h4>
+                      <p className="text-sm text-gray-400">{step?.testStage ?? "N/A"} • {step?.testTag ?? "N/A"}</p>
                     </div>
                   </div>
 

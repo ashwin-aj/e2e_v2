@@ -54,7 +54,9 @@ export default function StepModal({ step, applications, onSave, onClose }: StepM
       testTag: formData.testTag,
       order: step?.order || 1,
       initialTestData: JSON.parse(formData.initialTestData),
-      squashStepIds: formData.squashStepIds.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
+      squashStepIds: formData.squashStepIds
+  ? formData.squashStepIds.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
+  : []
     };
 
     onSave(stepData);
@@ -87,7 +89,8 @@ export default function StepModal({ step, applications, onSave, onClose }: StepM
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
             >
               <option value="">Select an application</option>
-              {applications.map(app => (
+              {Array.isArray(applications) &&
+              applications.map(app => (
                 <option key={app.id} value={app.id}>{app.name}</option>
               ))}
             </select>

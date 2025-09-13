@@ -4,7 +4,7 @@ import { useApp } from '../../context/AppContext';
 
 export default function ExecutionChart() {
   const { state } = useApp();
-  const { theme } = state;
+  const theme = (state as any)?.theme ?? 'light';
   
   // Generate daily execution data for the last 7 days
   const last7Days = Array.from({ length: 7 }, (_, i) => {

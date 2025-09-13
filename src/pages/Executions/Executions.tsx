@@ -62,9 +62,8 @@ export default function Executions() {
     if (execution.status === 'completed') return 100;
     if (execution.status === 'failed') return 100;
     
-    const completedPipelines = execution.pipelineExecutions.filter(p => 
-      p.status === 'passed' || p.status === 'failed'
-    ).length;
+    const completedPipelines = execution.pipelineExecutions.filter((p: { status: string }) =>
+      p.status === 'passed' || p.status === 'failed').length;
     const totalSteps = execution.flow.steps.length;
     return totalSteps > 0 ? (completedPipelines / totalSteps) * 100 : 0;
   };

@@ -255,7 +255,7 @@ export default function SquashGrid({ isOpen, onClose, onTestCaseSelect, flows }:
         <i className={`${icon} text-cyan-400`}></i>
         <span className="text-white font-medium">{data.name}</span>
         {data.isConfigured && (
-          <CheckCircle className="h-4 w-4 text-green-400" title="Configured in Orkestra" />
+          <CheckCircle className="h-4 w-4 text-green-400" aria-label="Configured in Orkestra" />
         )}
       </div>
     );
@@ -421,7 +421,6 @@ export default function SquashGrid({ isOpen, onClose, onTestCaseSelect, flows }:
               className="p-treetable-sm"
               scrollable
               scrollHeight="100%"
-              virtualScrollerOptions={{ itemSize: 46 }}
               emptyMessage={
                 <div className="flex flex-col items-center justify-center p-8">
                   <TestTube className="h-12 w-12 text-gray-600 mb-4" />

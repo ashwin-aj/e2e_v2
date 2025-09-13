@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Plus, Search, Filter, TestTube } from 'lucide-react';
+import { Plus, Search, Filter, TestTube, X } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import SquashGrid from '../../components/SquashGrid/SquashGrid';
 import { SquashTestCase } from '../../types/squash';
 import { useSquashGrid } from '../../hooks/useSquashGrid';
 import TestCaseTable from '../../components/TestCaseTable/TestCaseTable';
 import { generateFlowFromSquashTestCase } from '../../utils/testCaseHelpers';
+import { Flow } from '../../types';
 
 export default function Flows() {
   const { state, dispatch } = useApp();

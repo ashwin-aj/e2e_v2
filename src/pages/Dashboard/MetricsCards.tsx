@@ -4,7 +4,7 @@ import { useApp } from '../../context/AppContext';
 
 export default function MetricsCards() {
   const { state } = useApp();
-  const { theme } = state;
+  const theme = (state as any)?.theme ?? 'light';
   
   const totalExecutions = state.executions.length;
   const completedExecutions = state.executions.filter(e => e.status === 'completed').length;
@@ -20,8 +20,20 @@ export default function MetricsCards() {
         return acc + duration;
       }, 0) / completedWithTime.length / 1000 / 60 // Convert to minutes
     : 0;
+    
+  // --- changed code: add explicit types so metric.color is a known key ---
+  type Color = 'cyan' | 'green' | 'purple' | 'amber';
+  type ChangeType = 'positive' | 'negative' | 'neutral';
+  type Metric = {
+    title: string;
+    value: string;
+    icon: React.ComponentType<any>;
+    color: Color;
+    change: string;
+    changeType: ChangeType;
+  };
 
-  const metrics = [
+  const metrics : Metric[]  = [
     {
       title: 'Total Executions',
       value: totalExecutions.toString(),
@@ -56,7 +68,7 @@ export default function MetricsCards() {
     }
   ];
 
-  const colorClasses = {
+   const colorClasses: Record<Color, string> = {
     cyan: theme === 'dark' 
       ? 'from-cyan-600/20 to-cyan-400/10 border-cyan-500/30 text-cyan-400 bg-gray-800' 
       : 'from-cyan-50 to-cyan-100 border-cyan-200 text-cyan-600 bg-white',

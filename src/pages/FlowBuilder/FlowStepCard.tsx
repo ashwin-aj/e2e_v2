@@ -16,22 +16,22 @@ export default function FlowStepCard({ step, isLast, onEdit, onDelete }: FlowSte
         <div className="flex items-start justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center text-white font-medium text-sm">
-              {step.order}
+              {step?.order ?? "—"}
             </div>
             <div>
-              <h4 className="font-medium text-white mb-1">{step.application.name}</h4>
+              <h4 className="font-medium text-white mb-1"> {step?.application?.name ?? "Unknown App"}</h4>
               <div className="flex items-center space-x-4 text-xs text-gray-400">
                 <span className="flex items-center">
                   <GitBranch className="h-3 w-3 mr-1" />
-                  {step.branch}
+                  {step?.branch ?? "N/A"}
                 </span>
                 <span className="flex items-center">
                   <Server className="h-3 w-3 mr-1" />
-                  {step.testStage}
+                  {step?.testStage ?? "N/A"}
                 </span>
                 <span className="flex items-center">
                   <Tag className="h-3 w-3 mr-1" />
-                  {step.testTag}
+                  {step?.testTag ?? "N/A"}
                 </span>
               </div>
             </div>
@@ -53,7 +53,7 @@ export default function FlowStepCard({ step, isLast, onEdit, onDelete }: FlowSte
           </div>
         </div>
 
-        {Object.keys(step.initialTestData).length > 0 && (
+        {step?.initialTestData && Object.keys(step.initialTestData).length > 0 && (
           <div className="mt-4 pt-4 border-t border-gray-600">
             <h5 className="text-sm font-medium text-gray-300 mb-2">Initial Test Data</h5>
             <div className="bg-gray-800 rounded p-3">
